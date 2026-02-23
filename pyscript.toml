@@ -1,0 +1,21 @@
+name = "SC 86B"
+
+# Install packages to be used in this project
+packages = ["pandas", "openpyxl"]
+
+# Fetch arbitrary content from URLs onto the virtual filesystem, just map a valid
+# URL to a destination in the filesystem path
+[files]
+"./assets/program_logic_v6.xlsx" = "./assets/program_logic_v6.xlsx"
+
+# Pin the Python interpreter to a specific value - for example making sure that
+# pyscript uses a specific version of pyodide or micropython
+# interpreter = "0.23.4"
+
+# Set the interaction between the main thread and worker limited to one way
+# calls from the main thread
+# sync_main_only = true
+
+## Please use the official documentation for further explanation and examples
+# of how to use these features if they are unfamiliar to you.
+# https://docs.pyscript.net/2025.2.1/user-guide/configuration

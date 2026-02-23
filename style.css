@@ -1,0 +1,236 @@
+body {
+	width: 60%;
+	padding-left: 20%;
+	padding-right: 20%;
+  margin: 0;
+	font-family: Arial, Helvetica, sans-serif;
+  @media screen and (max-width: 600px) {
+    width: 98%;
+    padding-left: 1%;
+    padding-right: 1%;
+  }
+}
+
+details {
+  border: 1px solid #aaa;
+  border-radius: 4px;
+  padding: 0.5em 0.5em 0em;
+  margin-bottom: 1em;
+}
+
+details[open] {
+  padding: 0.5em;
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 18%;
+  margin: 0.5em;
+  padding: 0.5em;
+  border: 1px solid #aaa;
+  border-radius: 4px;
+  display: none
+}
+
+.output-left {
+  float: left;
+  margin: 0;
+  width: 80%;
+  @media screen and (max-width: 600px) {
+    width: 100%;
+  }
+}
+
+.output-right {
+  float: right;
+  margin: 0;
+  width: 20%;
+  text-align: right;
+  font-style: italic;
+  @media screen and (max-width: 600px) {
+    width: 100%;
+    float: left;
+    text-align: left;
+    padding-top: 0.5em;
+  }
+}
+
+.titlebar {
+  border: 1px solid #aaa;
+  border-radius: 4px;
+  padding: 0.5em 0.5em 0.5em;
+  margin-bottom: 1em;
+  margin-top: 1em;
+}
+
+summary {
+  background-color: #dddddd;
+  font-weight: bold;
+  margin: 0.5em -0.5em 0.5em;
+  padding: 0.5em;
+}
+
+/* summary:hover {
+  cursor: pointer;
+} */
+
+details[open] summary {
+  border-bottom: 1px solid #aaa;
+  margin-bottom: 0.5em;
+}
+
+.line {
+  width: 98%;
+  height: 2px;
+  margin-left: 1;
+  margin-right: 1%;
+  background-color: #aaa;
+}
+
+table {
+  border-collapse: collapse;
+  border: 2px solid rgb(140 140 140);
+  font-family: sans-serif;
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+}
+
+caption {
+  caption-side: bottom;
+  padding: 10px;
+  font-weight: bold;
+}
+
+thead,
+tfoot {
+  background-color: rgb(228 240 245);
+  text-align: left;
+}
+
+th,
+td {
+  border: 1px solid rgb(160 160 160);
+  padding: 8px 10px;
+  text-align: left;
+}
+
+td {
+  text-align: left;
+}
+
+tbody > tr:nth-of-type(even) {
+  background-color: rgb(237 238 242);
+}
+
+tfoot th {
+  text-align: left;
+}
+
+tfoot td {
+  font-weight: bold;
+}
+
+pre {
+    /*background: #f4f4f4;
+    border: 1px solid #ddd;
+    border-left: 3px solid #f36d33;
+    color: #666;*/
+    page-break-inside: avoid;
+    font-family: monospace;
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 1.6em;
+    max-width: 100%;
+    overflow: auto;
+    padding: 1em 1.5em;
+    display: block;
+    word-wrap: break-word;
+}
+
+img {
+  width: 50%;
+}
+
+
+.tooltip {
+	position: relative;
+	display: inline-block;
+	color: rgb(107, 122, 133);
+	transition: color 0.6s;
+	/*border-bottom: 1px dotted rgb(5, 66, 107);*/
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+  border: 1px solid #aaa;
+  border-radius: 4px;
+  padding: 0.5em 0.5em 0.5em;
+  margin-bottom: 1em;
+	visibility: hidden;
+	padding: 10px;
+	width: 240px;
+	background-color: rgb(255, 255, 255);
+	font-size: 16px;
+	font-weight: 300;
+	text-align: left;
+	line-height: 20px;
+	border-radius: 6px;
+  color: rgb(0, 0, 0);
+
+	/* Position the tooltip text - see examples below! */
+	position: absolute;	
+	z-index: 1;
+	bottom: 100%;
+	left: 50%;
+	margin-left: -120px; /* Use half of the width (120/2 = 60), to center the tooltip */
+	opacity: 0;
+}
+
+/* .tooltip:hover {
+	
+} */
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+	visibility: visible;
+	opacity: 1;
+	transition: opacity .6s;
+}
+
+.input-line {
+	width: 100%;
+	display: inline-block;
+	border-bottom: 1px dotted rgb(5, 66, 107);
+	padding-bottom: 0.25em;
+  padding-top: 0.25em;
+  margin-top: 0.25em;
+}
+
+
+#header-loading-bar {
+	width: 100%;
+	height: 2em;
+  padding-top: 0.5em;
+	background-color: rgb(207, 152, 90);
+  text-align: center;
+	color: rgb(0, 0, 0);
+  border-radius: 4px;
+  margin-bottom: 0.5em;
+}
+
+#application {
+  display: none;
+}
+
+select {
+  float: right;
+  width: 20%;
+  margin-bottom: 0.5em;
+  @media screen and (max-width: 600px) {
+    width: 100%;
+    float: left;
+    text-align: left;
+    margin-top: 0.5em;
+  }
+}

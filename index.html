@@ -1,0 +1,256 @@
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="./style.css" type="text/css" rel="stylesheet">
+	<meta charset="UTF-8"> 
+
+    <!-- This script tag bootstraps PyScript -->
+	<script type="module" src="https://pyscript.net/releases/2025.8.1/core.js"></script>
+
+</head>
+
+<title>IEC fibre optic connector standards</title>
+
+<body>
+
+    <header>
+    </header>
+
+    <!-- Load Python script -->
+    <script type="py" src="./main.py" config="./pyscript.toml"></script>
+
+    <script>
+        // This script hides the loading message when done
+        addEventListener('py:done', () => document.getElementById('header-loading-bar').style.display = 'none');
+        addEventListener('py:done', () => document.getElementById('application').style.display = 'block');
+
+        
+    </script>
+
+    <div class="titlebar">
+        <img src="./assets/IEC_logo.jpg" id="logo" style="width: 3em;"></img>
+        <p><b>IEC fibre optic connector standards</b></p>
+        <p>IEC SC 86B: Fibre optic interconnecting devices and passive components</p>
+        <p><b>Updated:</b> 15/12/25</p>
+        <p>This digital tool is intended to assist standards-users in identifying relevant standards for their purpose. In all cases, users are recommended to refer to the latest version of the relevant part.</p>
+        <p>This tool is provided without warranty or guarantee, although every effort has been made to ensure its accuracy. If any issues are identified, please contact the working group here.</p>
+    </div>
+
+    <div id="header-loading-bar">loading the tool - please wait</div>
+
+    <div id="application">        
+        
+        <div class="titlebar">
+            <summary id="1" style="margin-top: -0.5em"><b>1. Inputs</b></summary>
+            
+            <span class="input-line">Connector type
+                <div class="tooltip"><sup>(?)</sup><span class="tooltiptext">Select from list</span></div>
+                <select name="IN1" id="IN1">
+                    <option hidden disabled selected value></option>
+                    <option id="LC" value="LC">LC</option>
+                    <option id="LSH" value="LSH">LSH</option>
+                    <option id="MDC" value="MDC">MDC</option>
+                    <option id="MPO 1x12" value="MPO 1x12">MPO 1x12</option>
+                    <option id="MPO 1x16" value="MPO 1x16">MPO 1x16</option>
+                    <option id="MPO 2x12" value="MPO 2x12">MPO 2x12</option>
+                    <option id="MPO 2x16" value="MPO 2x16">MPO 2x16</option>
+                    <option id="SAC" value="SAC">SAC</option>
+                    <option id="SC" value="SC">SC</option>
+                    <option id="SEN" value="SEN">SEN</option>
+                </select>
+            </span>
+
+            <span class="input-line">Fibre type
+                <div class="tooltip"><sup>(?)</sup><span class="tooltiptext">Select from list</span></div>
+                <select name="IN2" id="IN2">
+                    <option hidden disabled selected value></option>
+                    <option id="Single-mode" value="Single-mode">Single-mode</option>
+                    <option id="Multimode" value="Multimode">Multimode</option>
+                </select>
+            </span>
+
+            <span class="input-line">Cable type
+                <div class="tooltip"><sup>(?)</sup><span class="tooltiptext">Select from list</span></div>
+                <select name="IN3" id="IN3">
+                    <option hidden disabled selected value></option>
+                    <option value="Primary coated fibre">Primary coated fibre (d=200-245 µm)</option>
+                    <option value="Buffered fibre">Buffered fibre (d=400-900 µm)</option>
+                    <option value="Ribbon fibre">Ribbon fibre (3,0x0,25-4,0x0,5 mm)</option>
+                    <option value="Reinforced cable">Reinforced cable (d=1,4-3,0 mm)</option>
+                </select>
+            </span>
+
+            <span class="input-line">PC or APC ferrule end face
+                <div class="tooltip"><sup>(?)</sup><span class="tooltiptext">Select from list</span></div>
+                <select name="IN4" id="IN4">
+                    <option hidden disabled selected value></option>
+                    <option value="PC">PC</option>
+                    <option value="APC">APC</option>
+                </select>
+            </span>
+
+            <span class="input-line">Attenuation grade
+                <div class="tooltip"><sup>(?)</sup><span class="tooltiptext">Select from list</span></div>
+                <select name="IN5" id="IN5">
+                    <option hidden disabled selected value></option>
+                    <option value="B (mean ≤ 0,12 dB; ≥97 % ≤ 0,25 dB)">B (mean ≤ 0,12 dB; ≥97 % ≤ 0,25 dB)</option>
+                    <option value="C (mean ≤ 0,25 dB; ≥97 % ≤ 0,5 dB)">C (mean ≤ 0,25 dB; ≥97 % ≤ 0,5 dB)</option>
+                    <option value="D (mean ≤ 0,5 dB; ≥97 % ≤ 1,0 dB)">D (mean ≤ 0,5 dB; ≥97 % ≤ 1,0 dB)</option>
+                    <option value="Bm (mean ≤ 0,3 dB; ≥97 % ≤ 0,6 dB)">Bm (mean ≤ 0,3 dB; ≥97 % ≤ 0,6 dB)</option>
+                    <option value="Cm (mean ≤ 0,5 dB; ≥97 % ≤ 1,0 dB)">Cm (mean ≤ 0,5 dB; ≥97 % ≤ 1,0 dB)</option>
+                </select>
+            </span>
+
+            <span class="input-line">Return loss grade
+                <div class="tooltip"><sup>(?)</sup><span class="tooltiptext">Select from list</span></div>
+                <select name="IN6" id="IN6">
+                    <option hidden disabled selected value></option>
+                    <option value="1 (≥ 60 dB, mated)">1 (≥ 60 dB, mated)</option>
+                    <option value="2 (≥ 45 dB, mated)">2 (≥ 45 dB, mated)</option>
+                    <option value="3 (≥ 35 dB, mated)">3 (≥ 35 dB, mated)</option>
+                    <option value="4 (≥ 26 dB, mated)">4 (≥ 26 dB, mated)</option>
+                    <option value="1m (≥ 45 dB, mated)">1m (≥ 45 dB, mated)</option>
+                    <option value="2m (≥ 20 dB, mated)">2m (≥ 20 dB, mated)</option>
+                </select>
+            </span>
+
+            <span class="input-line">Performance category - operating service environment (temperature range)
+                <div class="tooltip"><sup>(?)</sup><span class="tooltiptext">Select from list</span></div>
+                <select style="margin-bottom: 0.5em;" name="IN7" id="IN7">
+                    <option hidden disabled selected value></option>
+                    <option value="C - indoor controlled (-10/+60 °C)">C - indoor controlled (-10/+60 °C)</option>
+                    <option value="C-HD - indoor controlled with additional heat dissipation (-10/+70 °C)">C-HD - indoor controlled with additional heat dissipation (-10/+70 °C)</option>
+                    <option value="OP - outdoor protected (-25/+70 °C)">OP - outdoor protected (-25/+70 °C)</option>
+                    <option value="OP+ - outdoor protected with wider temperature range (-40/+75 °C)">OP+ - outdoor protected with wider temperature range (-40/+75 °C)</option>
+                    <option value="OP+-HD - outdoor protected with wider temperature range and additional heat dissipation  (-40/+85 °C)">OP+-HD - outdoor protected with wider temperature range and additional heat dissipation  (-40/+85 °C)</option>
+                    <option value="OP-HD - outdoor protected with additional heat dissipation (-25/+85 °C)">OP-HD - outdoor protected with additional heat dissipation (-25/+85 °C)</option>
+                </select>
+            </span>
+
+            <p></p>
+            <button id="reset_inputs">Reset</button>
+
+        
+            <summary id="2"><b>2. Outputs: Standards for writing specifications</b></summary>
+            
+            <span class="input-line">
+                <p class="output-left">Mechanical connector interface</p>
+                <p class="output-right" id="OUT1">to be assigned</p>
+            </span>
+
+            <span class="input-line">
+                <p class="output-left">Attenuation and return loss grades</p>
+                <p class="output-right" id="OUT2">to be assigned</p>
+            </span>
+
+            <span class="input-line">
+                <p class="output-left">Visual connector end face requirements</p>
+                <p class="output-right" id="OUT3">to be assigned</p>
+            </span>
+
+            <span class="input-line">
+                <p class="output-left">Connector end face geometric and ferrule parameters</p>
+                <p class="output-right" id="OUT4">to be assigned</p>
+            </span>
+
+            <span class="input-line">Mechanical and environmental connector performance
+                <span class="input-line" style="border: 0px; padding-top: 1em;">
+                    <p class="output-left">... terminated as pigtail or patchcord</p>
+                    <p class="output-right" id="OUT5">to be assigned</p>
+                </span>
+                <span class="input-line" style="border: 0px;">
+                    <p class="output-left">... terminated as cable assembly</p>
+                    <p class="output-right" id="OUT6">to be assigned</p>
+                </span>
+            </span>
+
+
+            <summary id="3"><b>3. Outputs: Standards for manufacturers</b></summary>
+
+            <span class="input-line">
+                <p class="output-left">Reference connector attenuation requirements</p>
+                <p class="output-right" id="OUT7">to be assigned</p>
+            </span>
+
+            <span class="input-line">
+                <p class="output-left">Reference connector end face geometric and ferrule parameters</p>
+                <p class="output-right" id="OUT8">to be assigned</p>
+            </span>
+
+            <span class="input-line">
+                <p class="output-left">Attenuation measurement of randomly mated connectors</p>
+                <p class="output-right" id="OUT9">to be assigned</p>
+            </span>
+
+            <span class="input-line">
+                <p class="output-left">Return loss measurement</p>
+                <p class="output-right" id="OUT10">to be assigned</p>
+            </span>
+
+            <span class="input-line">
+                <p class="output-left">Visual connector end face inspection procedure</p>
+                <p class="output-right" id="OUT11">to be assigned</p>
+            </span>
+
+            <span class="input-line">
+                <p class="output-left">Visual connector end face inspection microscope requirements</p>
+                <p class="output-right" id="OUT12">to be assigned</p>
+            </span>
+
+
+            <summary id="4"><b>4. Outputs: Standards for planners and installers</b></summary>
+            
+            <span class="input-line">
+                <p class="output-left">Planning and installation of premises cabling</p>
+                <p class="output-right" id="OUT13">to be assigned</p>
+            </span>
+            
+            <span class="input-line">
+                <p class="output-left">Testing of optical fibre cabling (inspection and cleaning of connector end faces, optical performance testing)</p>
+                <p class="output-right" id="OUT14">to be assigned</p>
+            </span>
+
+            <span class="input-line">
+                <p class="output-left">Attenuation and return loss measurement of installed cable plant</p>
+                <p class="output-right" id="OUT15">to be assigned</p>
+            </span>
+
+            <span class="input-line">
+                <p class="output-left">Visual connector end face inspection microscope requirements</p>
+                <p class="output-right" id="OUT16">to be assigned</p>
+            </span>
+
+            <span class="input-line">
+                <p class="output-left">Cleaning methods</p>
+                <p class="output-right" id="OUT17">to be assigned</p>
+            </span>
+        </div>
+    
+    </div>
+
+    <div class="titlebar">
+        <p></p>        
+        <p>This digital tool is intended to assist standards-users in identifying relevant standards for their purpose. In all cases, users are recommended to refer to the latest version of the relevant part.</p>
+        <p>Guide to nomenclature for a standard "IEC AAAAA-x-yy":</p>
+        <ul>
+            <li>-x - to be determined</li>
+            <li>-yy - to be determined</li>
+            <li>*p – planned</li>
+            <li>*d – in development</li>
+        </ul>
+        <p>"Not available" – not to be forthcoming in next few years</p>
+
+    </div>
+
+    
+
+</body>
+	
+  
+</html>
