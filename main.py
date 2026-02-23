@@ -1,11 +1,8 @@
 import warnings
 warnings.filterwarnings("ignore")
 
-# import pandas as pd
-from pandas import read_excel, concat
-#from pyodide.ffi.wrappers import add_event_listener
-from js import document
-#from js import console, window
+from pandas import read_excel
+# from js import document
 from pyscript import when, document
 
 class program_state:
@@ -159,7 +156,7 @@ def reset_inputs():
 
     # reset input values
     program.reset_input_values()
-    
+
     reset_outputs()
     apply_outputs()
 
@@ -182,7 +179,6 @@ def filter_tables(tables, column_headings, inputs):
 
             # return to filtered tables
             tables[key] = table
-            print(table)
         
         return tables
 
@@ -194,8 +190,6 @@ def enforce_only_options(tables, inputs):
     # for each table
     for key, table in tables.items():
         if len(table) == 1:
-            print("Only 1 option in table: ")
-            print(table)
 
             # enforce inputs to mandatory values
             for column in table.columns:
@@ -261,21 +255,16 @@ def update_inputs():
                     # check if the option is in the table
                     if option not in table[input].values:
                         status = False
-                        # print("Option: " + option + " is disabled")
                         selector_string = "#" + input + " option[value='" + option + "']"
                         document.querySelector(selector_string).disabled = True
                         break
-                        
-    print(input_options)
 
 
 @when("change", "#IN1")
 def IN1_callback():
 
-    # get value
+    # get value then update possible inputs and outputs
     program.IN1 = document.getElementById("IN1").value
-
-    # update possible inputs and outputs
     update_inputs()
     update_outputs()
 
@@ -284,59 +273,47 @@ def IN2_callback():
 
     # get value
     program.IN2 = document.getElementById("IN2").value
-
-    # update possible inputs and outputs
-    update_inputs()
+    # update_inputs()
     update_outputs()
 
 
 @when("change", "#IN3")
 def IN3_callback():
 
-    # get value
+    # get value then update possible inputs and outputs
     program.IN3 = document.getElementById("IN3").value
-
-    # update possible inputs and outputs
     update_inputs()
     update_outputs()
 
 @when("change", "#IN4")
 def IN4_callback():
 
-    # get value
+    # get value then update possible inputs and outputs
     program.IN4 = document.getElementById("IN4").value
-
-    # update possible inputs and outputs
     update_inputs()
     update_outputs()
 
 @when("change", "#IN5")
 def IN5_callback():
 
-    # get value
+    # get value then update possible inputs and outputs
     program.IN5 = document.getElementById("IN5").value
-
-    # update possible inputs and outputs
     update_inputs()
     update_outputs()
 
 @when("change", "#IN6")
 def IN6_callback():
 
-    # get value
+    # get value then update possible inputs and outputs
     program.IN6 = document.getElementById("IN6").value
-
-    # update possible inputs and outputs
     update_inputs()
     update_outputs()
 
 @when("change", "#IN7")
 def IN7_callback():
 
-    # get value
+    # get value then update possible inputs and outputs
     program.IN7 = document.getElementById("IN7").value
-
-    # update possible inputs and outputs
     update_inputs()
     update_outputs()
 
