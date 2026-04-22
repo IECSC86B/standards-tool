@@ -72,7 +72,7 @@ let program = {
     "IN2": ["Single-mode", "Multimode"],
     "IN3": ["Primary coated fibre", "Buffered fibre", "Ribbon fibre", "Reinforced cable"],
     "IN4": ["PC", "APC"],
-    "IN5": ["B", "C", "D", "Bm", "Cm"],
+    "IN5": ["B (mean ≤ 0,12 dB; at least 97 % ≤ 0,25 dB)", "C (mean ≤ 0,25 dB; at least 97 % ≤ 0,5 dB)", "D (mean ≤ 0,5 dB; at least 97 % ≤ 1,0 dB)", "Bm (mean ≤ 0,3 dB; at least 97 % ≤ 0,6 dB)", "Cm (mean ≤ 0,5 dB; at least 97 % ≤ 1,0 dB)"],
     "IN6": ["1 (≥ 60 dB, mated)", "2 (≥ 45 dB, mated)", "3 (≥ 35 dB, mated)", "4 (≥ 26 dB, mated)", "1m (≥ 45 dB, mated)", "2m (≥ 20 dB, mated)"],
     "IN7": ["C", "C-HD", "OP", "OP+", "OP+-HD", "OP-HD"]
   },
@@ -365,6 +365,8 @@ function resetOutputs() {
 }
 
 // Update outputs
+// try catch is there because the logic below relies on program.INX being false until it's set by the user
+// ...but if you try to concatenate the string below, it will create an error
 function updateOutputs() {
   try {
     console.log("IN1: " + program.IN1);
@@ -399,18 +401,24 @@ function updateOutputs() {
   let table7 = program.tables["7"];
   let table8 = program.tables["8"];
 
+  // get each output value
+  // this is done in groups once the relevant inputs have been set by the user
+  // in each case, the program looks up the table using inputs and uses the findRow function to get the row, then assigns the output(s) based on the column name
+  
   // OUT1 and OUT9
   if (program.IN1) {
     let row = findRow(table2, { "Connector type": program.IN1 });
     if (row) {
       program.OUT1 = row["Mechanical connector interface"];
       console.log("OUT1: " + program.OUT1);
+      program.OUT1 = addLink(program.OUT1);
     }
 
     row = findRow(table5, { "Connector type": program.IN1 });
     if (row) {
       program.OUT9 = row["Attenuation measurement of randomly mated connectors"];
       console.log("OUT9: " + program.OUT9);
+      program.OUT9 = addLink(program.OUT9);
     }
   }
 
@@ -435,6 +443,12 @@ function updateOutputs() {
     console.log("OUT4: " + program.OUT4);
     console.log("OUT7: " + program.OUT7);
     console.log("OUT8: " + program.OUT8);
+    // add links
+    program.OUT2 = addLink(program.OUT2);
+    program.OUT3 = addLink(program.OUT3);
+    program.OUT4 = addLink(program.OUT4);
+    program.OUT7 = addLink(program.OUT7);
+    program.OUT8 = addLink(program.OUT8);
   }
 
   // OUT5
@@ -447,6 +461,7 @@ function updateOutputs() {
     if (row) {
       program.OUT5 = row["Mechanical and environmental connector performance (terminated as pigtail or patchcord)"];
       console.log("OUT5: " + program.OUT5);
+      program.OUT5 = addLink(program.OUT5);
     }
   }
 
@@ -460,6 +475,7 @@ function updateOutputs() {
     if (row) {
       program.OUT6 = row["Mechanical and environmental cable performance"];
       console.log("OUT6: " + program.OUT6);
+      program.OUT6 = addLink(program.OUT6);
     }
   }
 
@@ -469,6 +485,7 @@ function updateOutputs() {
     if (row) {
       program.OUT18 = row["Standard"];
       console.log("OUT18: " + program.OUT18);
+      program.OUT18 = addLink(program.OUT18);
     }
   }
 
@@ -477,6 +494,7 @@ function updateOutputs() {
   if (row) {
     program.OUT19 = row["Standard"];
     console.log("OUT19: " + program.OUT19);
+    program.OUT19 = addLink(program.OUT19);
   }
 
   // OUT10
@@ -484,6 +502,7 @@ function updateOutputs() {
   if (row) {
     program.OUT10 = row["Standard"];
     console.log("OUT10: " + program.OUT10);
+    program.OUT10 = addLink(program.OUT10);
   }
 
   // OUT11 and OUT16
@@ -493,6 +512,8 @@ function updateOutputs() {
     program.OUT16 = program.OUT11;
     console.log("OUT11: " + program.OUT11);
     console.log("OUT16: " + program.OUT16);
+    program.OUT11 = addLink(program.OUT11);
+    program.OUT16 = addLink(program.OUT16);
   }
 
   // OUT12
@@ -500,6 +521,7 @@ function updateOutputs() {
   if (row) {
     program.OUT12 = row["Standard"];
     console.log("OUT12: " + program.OUT12);
+    program.OUT12 = addLink(program.OUT12);
   }
 
   // OUT13
@@ -507,6 +529,7 @@ function updateOutputs() {
   if (row) {
     program.OUT13 = row["Standard"];
     console.log("OUT13: " + program.OUT13);
+    program.OUT13 = addLink(program.OUT13);
   }
 
   // OUT14
@@ -514,6 +537,7 @@ function updateOutputs() {
   if (row) {
     program.OUT14 = row["Standard"];
     console.log("OUT14: " + program.OUT14);
+    program.OUT14 = addLink(program.OUT14);
   }
 
   // OUT15
@@ -526,6 +550,7 @@ function updateOutputs() {
     if (row) {
       program.OUT15 = row["Attenuation and return loss measurement of installed cable plant"];
       console.log("OUT15: " + program.OUT15);
+      program.OUT15 = addLink(program.OUT15);
     }
   }
 
@@ -534,6 +559,7 @@ function updateOutputs() {
   if (row) {
     program.OUT17 = row["Standard"];
     console.log("OUT17: " + program.OUT17);
+    program.OUT17 = addLink(program.OUT17);
   }
 
   applyOutputs();
@@ -638,7 +664,7 @@ document.addEventListener("DOMContentLoaded", function() {
     } else {
       program.tables = data;
       console.log("Excel file loaded successfully");
-      console.log(program.tables);
+      //console.log(program.tables);
     }
   });
 });
@@ -702,7 +728,7 @@ function worksheetToArray(worksheet) {
   return result;
 }
 
-// Helper function to find first row matching criteria
+// function to find first row matching criteria
 function findRow(table, criteria) {
   for (let i = 0; i < table.length; i++) {
     let row = table[i];
@@ -718,4 +744,8 @@ function findRow(table, criteria) {
     }
   }
   return null;
+}
+
+function addLink(standard) {
+  return "<a href=\"https://webstore.iec.ch/en/iec-search/result?q=" + standard + "\" target=\"_blank\">" + standard + "</a>";
 }
