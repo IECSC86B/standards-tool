@@ -269,6 +269,26 @@ function updateInputs() {
           }
         }
       }
+
+      // Additional filter to check that each option for IN6 is valid, by comparing IN2 and IN4 values from FILTER 2
+      // and ensuring that they both appear in a single row in FILTER 1, after other filters have been applied
+      // This is required due to the complexity of comparing FILTER 1 and FILTER 2
+      if (input === "IN6" && isValid) {
+        let hasMatchingFilter1Row = tables["Filter 2"].some(filter2Row =>
+          filter2Row["IN6"] === option &&
+          tables["Filter 1"].some(filter1Row =>
+            filter1Row["IN2"] === filter2Row["IN2"] &&
+            filter1Row["IN4"] === filter2Row["IN4"]
+          )
+        );
+
+        if (!hasMatchingFilter1Row) {
+          console.log("option " + option + " has no matching IN2 and IN4 values in Filter 1");
+          if (element) {
+            element.disabled = true;
+          }
+        }
+      }
     }
   }
 }
@@ -658,7 +678,7 @@ function validateColumns(importedColumns, expectedColumns) {
 
 // Load Excel file on startup
 document.addEventListener("DOMContentLoaded", function() {
-  importExcelFile("./assets/program_logic_v6.xlsx", function(error, data) {
+  importExcelFile("./assets/program_logic_v7.xlsx", function(error, data) {
     if (error) {
       console.error("Error loading Excel file:", error);
     } else {
@@ -747,5 +767,11 @@ function findRow(table, criteria) {
 }
 
 function addLink(standard) {
-  return "<a href=\"https://webstore.iec.ch/en/iec-search/result?q=" + standard + "\" target=\"_blank\">" + standard + "</a>";
+  if (standard.includes("*")) {
+    return standard;
+  }
+
+  return standard.replace(/\b(?:ISO\/IEC |IEC PAS |IEC TR |IEC )[\d-]+/g, function(match) {
+    return "<a href=\"https://webstore.iec.ch/en/iec-search/result?q=" + match + "\" target=\"_blank\">" + match + "</a>";
+  });
 }
